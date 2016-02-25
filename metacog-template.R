@@ -129,8 +129,7 @@ summary(mf)
 ## Wykres
 
 ## Pamiętamy wszyscy, że w regresji logistycznej nie modelujemy wcale
-## średniej zmiennej zależnej, tylko odwrotność funkcji logistycznej
-## średniej zmiennej zależnej.
+## średniej zmiennej zależnej, tylko funkcję logistyczną średniej zmiennej zależnej.
 
 ## Dodajemy zmienną z predykcjami dopasowanego modelu do naszego
 ## zbioru danych:
@@ -148,5 +147,6 @@ d$fit = (model.matrix(m) %*% fixef(m))[,1]
 res = aggregate(fit ~ order + time + ratingd, d, mean)
 ggplot(res, aes(x = ratingd, y = fit, group = order, color = order)) + geom_line() + facet_grid(.~time)
 
+## A tutaj pokazujemy dopasowanie na oryginalnej skali (poprawności)
 ggplot(res, aes(x = ratingd, y = binomial()$linkinv(fit), group = order, color = order)) +
     geom_line() + facet_grid(.~time) + labs(y = 'Accuracy')
